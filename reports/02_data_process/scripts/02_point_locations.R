@@ -1,29 +1,27 @@
 ## script to visualize data points outside of Tom's extent map
 
 
-rm(list=ls()) # clear the workspace
+#rm(list=ls()) # clear the workspace
 library(tidyverse)
-library(geojsonsf) #geojson_sf
-library(geojsonio)
 
-import_geojson <- function(x) {
-  print(x)
-  as.data.frame(geojson_read(x, what = "sp"))
-}
-
-data0 <- import_geojson("reports/03_modelling/data/2023-07-17_data_outside_extent.geojson") 
-
-data_explore <- data0 %>% 
-  group_by(Original_source, Country) %>% 
-  summarise(avg_distance = round(mean(distance), 0) )
-data_explore
+# arguments for snakemake
+args <- commandArgs(trailingOnly=T)
+import_data <- args[1]
+import_GEE_data <- args[2]
+export_file <- args[3]
 
 
+# import_data <- "reports/02_data_process/data/data_clean_SOMconv_uniqueSiteName.csv"
+# import_GEE_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
+# export_file <- "reports/02_data_process/data/data_clean_locationsEdit.csv"
 
-gee_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
+soc_data <- read_csv(import_data)
+
+
+####### GEE points with NAs
 
 #### import 2: load predicted values of covariate layers (from GEE) for each training data (unique lat and long)
-GEE_data_raw <- read_csv(gee_data) %>% 
+GEE_data_raw <- read_csv(import_GEE_data) %>% 
   #only select the variable names extracted using GEE
   dplyr::select(Site_name, 
                 ndvi_med, ndvi_stdev,
@@ -53,5 +51,38 @@ GEE_data_NAs <- GEE_data_raw %>% # issues with NAs
 # file_name_GEE <- paste(Sys.Date(),"GEE_export_NAs.csv", sep = "_")
 # export_file_GEE <- paste(path_out, file_name_GEE, sep = '')
 # write.csv(GEE_data_NAs, export_file_GEE, row.names = F)
+#dataNAs0 <- read_csv("reports/02_data_process/data/2023-08-01_GEE_export_NAs.csv") 
 
 
+# exclude sites over 60deg N
+dataNAs <- GEE_data_NAs %>% 
+  filter(Latitude <= 60)
+
+
+test <- dataNAs %>% 
+  mutate(initials = str_extract(Site_name, pattern = "\\w+")) %>% 
+  filter(initials == "MC")
+test$initials
+
+
+
+####### check data outside extent ####
+
+# import_geojson <- function(x) {
+#   print(x)
+#   as.data.frame(geojson_read(x, what = "sp"))
+# }
+# 
+# data0 <- import_geojson("reports/03_modelling/data/2023-07-17_data_outside_extent.geojson") 
+# 
+# data_explore <- data0 %>% 
+#   group_by(Original_source, Country) %>% 
+#   summarise(avg_distance = round(mean(distance), 0) )
+# data_explore
+# 
+
+########## remove points after check  ###########
+soc_locations_edited <- soc_data 
+
+########## export ###########
+write.csv(soc_locations_edited, export_file, row.names = F)

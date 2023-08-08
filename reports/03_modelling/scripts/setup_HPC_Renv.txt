@@ -1,0 +1,6 @@
+Rscript -e 'install.packages("randomForest", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("CAST", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("ranger", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("rgdal", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("terra", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("geojsonsf", repos="https://cloud.r-project.org")'

@@ -3,20 +3,29 @@
 # 14.07.23 
 
 
-rm(list=ls()) # clear the workspace
+#rm(list=ls()) # clear the workspace
 library(tidyverse)
 library(nimble) #for the nls function
 library(propagate) #to predic nls
 library(nlstools) # to bootstrap nls
 
+
+# arguments for snakemake
+args <- commandArgs(trailingOnly=T)
+import_data <- args[1]
+export_fig <- args[2]
+export_file <- args[3]
+
+# import_data <- "reports/02_data_process/data/data_clean_SOMconv_uniqueSiteName.csv"
+# export_fig <- "reports/02_data_process/figures/SOM_to_BD/SOM_to_BD_graph.png"
+# export_file <- 'reports/02_data_process/data/data_clean_BDconv.csv'
+
+
 ##### 1. DATA IMPORT #####
 
 
-#import compiled data
-input_file01 <- "reports/02_data_process/data/data_clean_SOMconv_uniqueSiteName.csv"
-
 # import 
-data0<- read.csv(input_file01) 
+data0<- read.csv(import_data) 
 
 data1 <- data0 %>% 
   #remove data with no OC_final data
@@ -154,34 +163,40 @@ SOM_to_BD_graph <- ggplot(studies_BD_SOM_convertedOC, aes(x = SOM_fraction, y = 
   theme_bw()+
   labs(x = "Soil organic matter (fraction)", y = "Bulk Density (g cm-3)")+
   #add our model line and text
-  geom_line(data = df_fitted_SOM, aes(x = xBD2_SOM, y =fitted_values_SOM), col = "yellow", size = 2, linetype = 2)+
-  annotate(geom = "text",  label = paste("yellow dashed BD = 1 / (( SOM /", round(k1_est,3),  
-                                         ") + (( 1 - SOM ) / ", round(k2_est,3),
-                                         ")) est. from measured SOM only"),
-           
-           y = 2.4, x = 0.6)+
-  
-  #add our model line and text (SOM measured and derived from OC)
-  geom_line(data = df_fitted_SOM_withOC, aes(x = xBD2_SOM, y =fitted_values_SOM_withOC), col = "yellow", size = 2, linetype = 1)+
-  annotate(geom = "text",  label = paste("yellow solid BD = 1 / (( SOM /", round(k1_est_withOC,3),  
-                                         ") + (( 1 - SOM ) / ", round(k2_est_withOC,3),
-                                         ")) est. from SOM with estimates from OC"),
-           
-           y = 2.25, x = 0.6)+
-  
+  # geom_line(data = df_fitted_SOM, aes(x = xBD2_SOM, y =fitted_values_SOM), col = "yellow", size = 2, linetype = 2)+
+  # annotate(geom = "text",  label = paste("yellow dashed BD = 1 / (( SOM /", round(k1_est,3),  
+  #                                        ") + (( 1 - SOM ) / ", round(k2_est,3),
+  #                                        ")) est. from measured SOM only"),
+  #          
+  #          y = 2.4, x = 0.6)+
+
   #add Morris model k1 and k2 line and text
-  geom_line(data = df_fitted_Morris, aes(x = xBD2_SOM, y =fitted_values_Morris), col = "purple", size = 2)+
-  annotate(geom = "text",  label = paste("purple MixingMod BD = 1 / (( SOM / 0.085) + (( 1 - SOM ) / 1.99)) from Morris et al. 2016"),
+  geom_line(data = df_fitted_Morris, aes(x = xBD2_SOM, y =fitted_values_Morris), col = "#f98e09", linewidth = 2, linetype = 1)+
+  annotate(geom = "text",  label = paste("Orange BD = 1 / (( SOM / 0.085) + (( 1 - SOM ) / 1.99)) from Morris et al. 2016"),
            
            y = 2.1, x = 0.6)+
   
   #add Holmquist model k1 and k2 line and text
-  geom_line(data = df_fitted_Holmquist, aes(x = xBD2_SOM, y =fitted_values_Holmquist), col = "purple", size = 2, linetype = 2)+
-  annotate(geom = "text",  label = paste("purple dashed BD = 1 / (( SOM / 0.098) + (( 1 - SOM ) / 1.67)) from Holmquist et al. 2018"),
+  geom_line(data = df_fitted_Holmquist, aes(x = xBD2_SOM, y =fitted_values_Holmquist), col = "#bc3754", linewidth = 2, linetype = 1)+
+  annotate(geom = "text",  label = paste("Pink BD = 1 / (( SOM / 0.098) + (( 1 - SOM ) / 1.67)) from Holmquist et al. 2018"),
            
-           y = 1.95, x = 0.6)
+           y = 1.95, x = 0.6)+
+  
+  
+  #add our model line and text (SOM measured and derived from OC)
+  geom_line(data = df_fitted_SOM_withOC, aes(x = xBD2_SOM, y =fitted_values_SOM_withOC), col = "#f0f921", linewidth = 2, linetype = 2)+
+  annotate(geom = "text",  label = paste("Yellow dashed BD = 1 / (( SOM /", round(k1_est_withOC,3),  
+                                         ") + (( 1 - SOM ) / ", round(k2_est_withOC,3),
+                                         ")) our equation"),
+           
+           y = 2.25, x = 0.6)+
+  scale_y_continuous(name = expression("Bulk density (g cm"^-3~")"))+
+  guides(shape = guide_legend(title = "SOM origin",override.aes = list(alpha =1)))+
+  theme(legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        axis.text = element_text(size = 14, color = "black"),
+        axis.title = element_text(size = 16, color = "black"))
 
-#SOM_to_BD_graph
 
 ##### 5. Apply model to data #####
 # BD = 1/[LOI/k1 + (1-LOI)/k2]
@@ -218,17 +233,15 @@ p <- data3 %>%
   theme_bw()+
   labs(x = "OC (%)",
        y = "BD (g cm-3)")
-p
+
 
 
 ##### 7. Export #####
 
+## SOM to BD graph
+ggsave(export_fig, plot = SOM_to_BD_graph, width = 9.72, height = 5.74)
+
 data_final <- data3 %>% 
   dplyr::select(-c("SOM_estimated", "BD_estimated", "SOM_coalesce_fraction"))
-
-path_out = 'reports/02_data_process/data/'
-
-file_name <- "data_clean_BDconv.csv"
-export_file <- paste(path_out, file_name, sep = '')
 
 write.csv(data_final, export_file, row.names = F)

@@ -14,17 +14,16 @@ library(geojsonsf)
 library(terra) #crs
 library(sf) # st_as_sf
 
-# args <- commandArgs(trailingOnly=T)
-# site_layer <- args[1]
-# gee_data <- args[2]
-# soc_data <- args[3]
-# output_gpkg <- args[4]
+args <- commandArgs(trailingOnly=T)
+site_layer <- args[1]
+gee_data <- args[2]
+soc_data <- args[3]
+output_gpkg <- args[4]
 
-site_layer <- "reports/03_modelling/data/export_uk_layers_30m-0000009216-0000036864.tif"
-gee_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
-#gee_data <- "reports/03_modelling/data/2023-07-10_data_covariates_extentonly.geojson"
-soc_data <- "reports/02_data_process/data/data_clean_SOCD.csv"
-output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
+# site_layer <- "reports/03_modelling/data/export_uk_layers_30m-0000009216-0000036864.tif"
+# gee_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
+# soc_data <- "reports/02_data_process/data/data_clean_SOCD.csv"
+# output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 
 
 ############## 1.1 Import data ####################

@@ -2,25 +2,29 @@
 # 4. Run predictions ####
 #------------------------------------------------------#
 
+rm(list=ls()) # clear the workspace
 library(tidyverse)
 library(raster)
 
 args <- commandArgs(trailingOnly=T)
 import_model <- args[1]
-import_tile <- args[2]
-pred_0_30 <- args[3]
-pred_30_100 <- args[4]
+tile_fornames <- args[2]
+import_tile <- args[3]
+pred_0_30 <- args[4]
+pred_30_100 <- args[5]
 
 
-# import_model<- "reports/03_modelling/snakesteps/03_models/model_random.rds"
-# import_tile <- "reports/03_modelling/data/export_uk_layers_30m-0000009216-0000036864.tif"
-
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
+# tile_fornames <- "reports/03_modelling/tiles/export_uk_layers_30m-0000000000-0000046080.tif"
+# import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
 # pred_0_30 <- "reports/03_modelling/snakesteps/04_output/test_prediction_0_30cm_t_ha_global.tif"
 # pred_30_100 <- "reports/03_modelling/snakesteps/04_output/test_prediction_30_100cm_t_ha_global.tif"
 
 ############## 4.1 Import tiles data ####################
 tile_layers <- raster::stack(import_tile)
-names_layers <- names(tile_layers)
+tile_fornames <- raster::stack(tile_fornames)
+names(tile_layers) <- names(tile_fornames)
+
 
 
 ## first, we need to define the depth at which we want to predict SOC_g_cm3
