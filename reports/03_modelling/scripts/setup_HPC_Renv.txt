@@ -4,3 +4,6 @@ Rscript -e 'install.packages("ranger", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("rgdal", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("terra", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("geojsonsf", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("raster", repos="https://cloud.r-project.org")' # to update raster 
+Rscript -e 'install.packages("twosamples", repos="https://cloud.r-project.org")' # for knndm function
+Rscript -e 'install.packages("maps", repos="https://cloud.r-project.org")' #to map world within ggplot
