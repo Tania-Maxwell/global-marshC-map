@@ -10,25 +10,26 @@
 #' by providing the trainDI object in the function call
 
 
-rm(list=ls()) # clear the workspace
+#rm(list=ls()) # clear the workspace
 library(tidyverse)
 library(CAST)
 library(caret)
 set.seed(7353)
 
 
-# args <- commandArgs(trailingOnly=T)
-# import_model <- args[1]
-# output_DI <- args[2]
+args <- commandArgs(trailingOnly=T)
+import_model <- args[1]
+output_DI <- args[2]
+source("scripts/trainDI.R")
 
-source("reports/04_model_tests/scripts/trainDI.R")  
-import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
-output_DI <- "reports/03_modelling/snakesteps/05_AOA/model_spatial_trainDI.rds"
+# source("reports/04_model_tests/scripts/trainDI.R")
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
+# output_DI <- "reports/03_modelling/snakesteps/05_AOA/model_spatial_trainDI.rds"
 
 ############## 5.1 Import model ####################
 final_model <- readRDS(import_model)
 
-final_model_trainDI <- CAST::trainDI(final_model)
+#final_model_trainDI <- CAST::trainDI(final_model)
 
 model <- final_model
 variables = "all"
@@ -160,9 +161,9 @@ weight = aoa_get_weights(model, variables = variables)
   
   # done ----
 
-aoa_results
-saveRDS(aoa_results, "reports/03_modelling/output/aoa_results.rds")
+
 
 ############## 5.2 Export DI ####################
-saveRDS(final_model_trainDI, output_DI)
-
+#saveRDS(final_model_trainDI, output_DI)
+saveRDS(aoa_results, output_DI)
+  

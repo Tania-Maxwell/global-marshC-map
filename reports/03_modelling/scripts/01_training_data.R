@@ -3,7 +3,7 @@
 #------------------------------------------------------#
 
 
-rm(list=ls()) # clear the workspace
+#rm(list=ls()) # clear the workspace
 # rep<-"http://cran.rstudio.com/"
 # if (!(require(ggplot2))) install.packages('ggplot2', repos=rep)
 # library(ggplot2)
@@ -23,7 +23,7 @@ output_gpkg <- args[4]
 # site_layer <- "reports/03_modelling/data/export_uk_layers_30m-0000009216-0000036864.tif"
 # gee_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
 # soc_data <- "reports/02_data_process/data/data_clean_SOCD.csv"
-# output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
+# # output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 
 
 ############## 1.1 Import data ####################
