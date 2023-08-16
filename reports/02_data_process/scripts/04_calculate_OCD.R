@@ -10,8 +10,8 @@ args <- commandArgs(trailingOnly=T)
 import_data <- args[1]
 export_file <- args[2]
 
-# import_data <- "reports/02_data_process/data/data_clean_BDconv.csv"
-# export_file <- 'reports/02_data_process/data/data_clean_SOCD.csv'
+# import_data <- "reports/02_data_process/snakesteps/03_bulk_density/data_clean_BDconv.csv"
+# export_file <- 'reports/02_data_process/snakesteps/04_OCD/data_clean_SOCD.csv'
 
 
 data0 <- read.csv(import_data)

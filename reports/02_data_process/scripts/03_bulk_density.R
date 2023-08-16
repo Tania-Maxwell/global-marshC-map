@@ -16,9 +16,9 @@ import_data <- args[1]
 export_fig <- args[2]
 export_file <- args[3]
 
-# import_data <- "reports/02_data_process/data/data_clean_SOMconv_uniqueSiteName.csv"
-# export_fig <- "reports/02_data_process/figures/SOM_to_BD/SOM_to_BD_graph.png"
-# export_file <- 'reports/02_data_process/data/data_clean_BDconv.csv'
+# import_data <- "reports/02_data_process/snakesteps/02_checkLocations/data_clean_locationsEdit.csv"
+# export_fig <- "reports/02_data_process/snakesteps/03_bulk_density/SOM_to_BD/SOM_to_BD_graph.png"
+# export_file <- 'reports/02_data_process/snakesteps/03_bulk_density/data_clean_BDconv.csv'
 
 
 ##### 1. DATA IMPORT #####

@@ -1,6 +1,6 @@
 
-import_SaltmarshC = "../../../SaltmarshC/reports/04_data_process/data/data_cleaned_SOMconverted.csv"
-import_GEE_data = "../03_modelling/data/2023-07-31_data_covariates_global.csv"
+import_SaltmarshC = "../../../SaltmarshC/reports/04_data_process/data/data_cleaned_SOMconverted.csv" # this file comes from data paper export. will hard code file when finalized
+import_GEE_data = "../03_modelling/data/2023-08-08_data_covariates_global.csv"
 
 rule all:
     input: 

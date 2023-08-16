@@ -8,8 +8,8 @@ output_csv <- args[2]
 output_for_GEE <- args[3]
 
 # import_SaltmarshC <- "../SaltmarshC/reports/04_data_process/data/data_cleaned_SOMconverted.csv"
-# output_csv <- "data_clean_SOMconv_uniqueSiteName.csv"
-# output_for_GEE <-  "data_clean_SOMconv_uniqueSiteName_forGEE.csv"
+# output_csv <- "reports/02_data_process/snakesteps/01_uniqueID/data_clean_SOMconv_uniqueSiteName.csv"
+# output_for_GEE <-  "reports/02_data_process/snakesteps/01_uniqueID/data_clean_SOMconv_uniqueSiteName_forGEE.csv"
 
 #---------------------------------------------------#
 #### 1. IMPORTS ####
