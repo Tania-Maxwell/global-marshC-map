@@ -15,7 +15,7 @@ pred_30_100 <- args[5]
 
 
 # import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
-# tile_fornames <- "reports/03_modelling/tiles/export_uk_layers_30m-0000000000-0000046080.tif"
+# tile_fornames <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
 # import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
 # pred_0_30 <- "reports/03_modelling/snakesteps/04_output/test_prediction_0_30cm_t_ha_global.tif"
 # pred_30_100 <- "reports/03_modelling/snakesteps/04_output/test_prediction_30_100cm_t_ha_global.tif"
@@ -119,7 +119,7 @@ prediction_0_100cm_t_ha <- sum(prediction_0_30cm_t_ha, prediction_30_100cm_t_ha)
 
 ############## 4.5 export  ####################
 
-writeRaster(prediction_0_30cm_t_ha, filename = pred_0_30, format = "GTiff")
-writeRaster(prediction_30_100cm_t_ha, filename = pred_30_100, format = "GTiff")
+writeRaster(prediction_0_30cm_t_ha, filename = pred_0_30)
+writeRaster(prediction_30_100cm_t_ha, filename = pred_30_100)
 
 

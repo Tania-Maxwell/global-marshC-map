@@ -20,10 +20,10 @@ gee_data <- args[2]
 soc_data <- args[3]
 output_gpkg <- args[4]
 
-# site_layer <- "reports/03_modelling/data/export_uk_layers_30m-0000009216-0000036864.tif"
-# gee_data <- "reports/03_modelling/data/2023-07-31_data_covariates_global.csv"
+# site_layer <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
+# gee_data <- "reports/03_modelling/data/2023-08-16_data_covariates_global.csv"
 # soc_data <- "reports/02_data_process/data/data_clean_SOCD.csv"
-# # output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
+# output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 
 
 ############## 1.1 Import data ####################
@@ -43,25 +43,21 @@ GEE_data_raw <- read_csv(gee_data) %>%
   #only select the variable names extracted using GEE
   dplyr::select(Site_name, 
                 ndvi_med, ndvi_stdev,
-                #evi_med, evi_stdev,
-                #savi_med, savi_stdev,
                 Human_modification, M2Tide, PETdry, PETwarm,
                 TSM, maxTemp, minTemp, minPrecip, popDens, 
-                copernicus_elevation,
-                copernicus_slope, 
-               # coastalDEM_elevation,
-                #coastalDEM_slope,
-               # srtm_elevation,
-               # srtm_slope,
-               # merit_elevation,
-               # merit_slope,
+                copernicus_elevation, copernicus_slope,
+                SLR_zone, ECU,
                 .geo,
                 Lat_Long) 
 
 
-GEE_data <- GEE_data_raw %>% # issues with NAs
-  drop_na()
+GEE_data <- GEE_data_raw %>% # remove rows with any NA
+  drop_na() # this should only be ndvi (see test)
 
+
+test <- GEE_data_raw %>% 
+  filter(is.na(ndvi_med) == TRUE) # samples that are too inland (weren't in bathymask)
+# this is 225 samples = 6291 (nrow GEE_data_raw) -6066 (nrow GEE_data) which confirms this is the only column with NAs
 
 #### import 3: load training data with all original data (Site details and OC, SOM, BD measurements) 
 
@@ -100,7 +96,7 @@ trainDat <- df1_sf %>%
          Human_modification, M2Tide, PETdry, PETwarm,
          TSM, maxTemp, minTemp, minPrecip, popDens, 
          copernicus_elevation,
-         copernicus_slope,
+         copernicus_slope, SLR_zone, ECU,
          SOCD_g_cm3) %>% 
   dplyr::rename(response = SOCD_g_cm3)
 

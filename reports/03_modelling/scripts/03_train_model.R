@@ -174,11 +174,14 @@ print(model_nndm)
 variable_importance <- caret::varImp(model_nndm)
 plot_model_nndm <- plot(variable_importance)
 
-# pairs(trainDat_formod)
-# trainDat_sub1 <- trainDat_formod %>% 
-#   select(copernicus_elevation, copernicus_slope)
-# 
-# pairs(trainDat_sub1)
+pairs(trainDat_formod)
+trainDat_sub1 <- trainDat_formod %>%
+  select(copernicus_elevation, copernicus_slope, ndvi_med, ndvi_stdev, maxTemp, minTemp)
+
+plot(trainDat_sub1$ndvi_med, trainDat_sub1$ndvi_stdev)
+plot(trainDat_formod$maxTemp, trainDat_formod$minTemp)
+plot(trainDat_formod$PETdry, trainDat_formod$PETwarm)
+hist(trainDat_sub1$copernicus_slope)
 ############## 3.5 export  ####################
 
 #open an png with the right file name
