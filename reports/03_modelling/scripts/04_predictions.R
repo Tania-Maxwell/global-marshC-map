@@ -18,8 +18,8 @@ pred_30_100 <- args[5]
 # tile_fornames <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
 # # import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
 # import_tile <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
-# pred_0_30 <- "reports/03_modelling/snakesteps/04_output/test_prediction_0_30cm_t_ha_global.tif"
-# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/test_prediction_30_100cm_t_ha_global.tif"
+# pred_0_30 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_0_30cm_t_ha_export_the_wash_ENG.tif"
+# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_30_100cm_t_ha_export_the_wash_ENG.tif"
 
 ############## 4.1 Import tiles data ####################
 tile_layers <- raster::stack(import_tile)

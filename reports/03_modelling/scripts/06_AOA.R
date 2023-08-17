@@ -23,35 +23,38 @@ output_figDI_0_30 <- args[9]
 output_figDI_30_100 <- args[10]
 output_figure_0_30 <- args[11]
 output_figure_30_100 <- args[12]
+output_error_0_30 <- args[13]
+output_error_30_100 <- args[14]
+source("scripts/DItoErrormetric.R") 
 
 # # if doing spatial CV
 # import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
 # import_DI <- "reports/03_modelling/snakesteps/05_DI/model_spatial_trainDI.rds"
-# pred_0_30 <-  "reports/03_modelling/snakesteps/04_output/pred_0_30cm_t_ha_tile1-2.tif"
-# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/pred_30_100cm_t_ha_tile1-2.tif"
-# output_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_0_30_tile1-2.tif.rds"
-# output_aoa_30_100 <-"reports/03_modelling/snakesteps/06_AOA/AOA_30_100_tile1-2.tif.rds"
-# output_figDI_0_30 <-  "snakesteps/08_figures/DI_0_30_tile1-2.png"
-# output_figDI_30_100 <- "snakesteps/08_figures/DI_30_100_tile1-2.png"
-# output_figure_0_30 <- "snakesteps/08_figures/pred_AOA_0_30_tile1-2.png"
-# output_figure_30_100 <- "snakesteps/08_figures/pred_AOA_30_100_tile1-2.png"
+# pred_0_30 <-  "reports/03_modelling/snakesteps/04_output/pred_0_30cm_t_ha_export_the_wash_ENG.tif"
+# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/pred_30_100cm_t_ha_export_the_wash_ENG.tif"
+# output_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_0_30_export_the_wash_ENG.tif.rds"
+# output_aoa_30_100 <-"reports/03_modelling/snakesteps/06_AOA/AOA_30_100_export_the_wash_ENG.tif.rds"
+# output_figDI_0_30 <-  "snakesteps/08_figures/DI_0_30_export_the_wash_ENG.tif.png"
+# output_figDI_30_100 <- "snakesteps/08_figures/DI_30_100_export_the_wash_ENG.tif.png"
+# output_figure_0_30 <- "snakesteps/08_figures/pred_AOA_0_30_export_the_wash_ENG.tif.png"
+# output_figure_30_100 <- "snakesteps/08_figures/pred_AOA_30_100_export_the_wash_ENG.tif.png"
 
 
-# if doing nndm CV
-import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
-import_DI <- "reports/03_modelling/snakesteps/05_DI/model_nndm_trainDI.rds"
-pred_0_30 <-  "reports/03_modelling/snakesteps/04_output/nndm_pred_0_30cm_t_ha_tile1-2.tif"
-pred_30_100 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_30_100cm_t_ha_tile1-2.tif"
-output_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_0_30_tile1-2.tif.rds"
-output_aoa_30_100 <-"reports/03_modelling/snakesteps/06_AOA/AOA_nndm_30_100_tile1-2.tif.rds"
-output_figDI_0_30 <-  "reports/03_modelling/snakesteps/08_figures/DI_0_30_nndm_tile1-2.png"
-output_figDI_30_100 <- "reports/03_modelling/snakesteps/08_figures/DI_30_100_nndm_tile1-2.png"
-output_figure_0_30 <- "reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_tile1-2.png"
-output_figure_30_100 <- "reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_tile1-2.png"
-
-# # same for both nndm and spatial:
-import_tile <- "reports/03_modelling/tiles/tile1-2.tif"
-tile_fornames <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
+# # if doing nndm CV
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
+# import_DI <- "reports/03_modelling/snakesteps/05_DI/model_nndm_trainDI.rds"
+# pred_0_30 <-  "reports/03_modelling/snakesteps/04_output/nndm_pred_0_30cm_t_ha_export_the_wash_ENG.tif"
+# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_30_100cm_t_ha_export_the_wash_ENG.tif"
+# output_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_0_30_export_the_wash_ENG.tif.rds"
+# output_aoa_30_100 <-"reports/03_modelling/snakesteps/06_AOA/AOA_nndm_30_100_export_the_wash_ENG.tif.rds"
+# output_figDI_0_30 <-  "snakesteps/08_figures/DI_0_30_nndm_export_the_wash_ENG.tif.png"
+# output_figDI_30_100 <- "snakesteps/08_figures/DI_30_100_nndm_export_the_wash_ENG.tif.png"
+# output_figure_0_30 <- "snakesteps/08_figures/pred_AOA_0_30_nndm_export_the_wash_ENG.tif.png"
+# output_figure_30_100 <- "snakesteps/08_figures/pred_AOA_30_100_nndm_export_the_wash_ENG.tif.png"
+# 
+# # # same for both nndm and spatial:
+# import_tile <- "reports/03_modelling/tiles_locations/export_the_wash_ENG.tif"
+# tile_fornames <- "reports/03_modelling/tiles_locations/export_the_wash_ENG.tif"
 
 trainDI <- readRDS(import_DI)
 final_model <- readRDS(import_model)
@@ -146,3 +149,38 @@ dev.off()
 ###### 6.5 Export AOA as RDS #####
 saveRDS(a_0_30, output_aoa_0_30)
 saveRDS(a_30_100, output_aoa_30_100)
+
+
+#------------------------------------------------------#
+# 7. DI to Errormetric ####
+#------------------------------------------------------#
+
+
+###### 7.1 calculate error model and expected error #####
+
+errormodel_0_30 <- DItoErrormetric(final_model, trainDI = a_0_30$parameters, multiCV = FALSE)
+expected_error_0_30 <- terra::predict(a_0_30$DI, errormodel_0_30)
+
+errormodel_30_100 <- DItoErrormetric(final_model, trainDI = a_30_100$parameters, multiCV = FALSE)
+expected_error_30_100 <- terra::predict(a_30_100$DI, errormodel_30_100)
+
+
+###### 7.1 export figures #####
+
+# 0-30 cm
+png(filename = output_error_0_30,
+    width = 950, height = 367)
+par(mfrow = c(1, 2), mar = c("bottom" = 5, "left" = 4, "top" = 4, "right" = 6))
+plot(errormodel_0_30, main = "Error model 0-30cm")
+plot(expected_error_0_30, main = "Expected error 0-30cm")
+dev.off()
+
+# 30-100 cm
+png(filename = output_error_30_100,
+    width = 950, height = 367)
+par(mfrow = c(1, 2), mar = c("bottom" = 5, "left" = 4, "top" = 4, "right" = 6))
+plot(errormodel_30_100, main = "Error model 30-100cm")
+plot(expected_error_30_100, main = "Expected error 30-100cm")
+dev.off()
+
+

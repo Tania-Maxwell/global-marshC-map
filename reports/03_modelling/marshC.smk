@@ -146,12 +146,15 @@ rule calculate_AOA:
         output_figDI_0_30 = output_figDI_0_30, 
         output_figDI_30_100 = output_figDI_30_100,
         output_figure_0_30 = output_figure_0_30, #output as .png
-        output_figure_30_100 = output_figure_30_100
+        output_figure_30_100 = output_figure_30_100,
+        output_error_0_30 = output_error_0_30,
+        output_error_30_100 = output_error_30_100
     resources:
         mem_mb = 6000, # Resources are always meant to be specified as total per job, not by thread 
         runtime = 3
-    shell: "mkdir -p snakesteps/06_AOA/ && Rscript scripts/06_AOA.R {input.import_model} {input.import_DI} {input.import_tile} {input.tile_fornames} {input.pred_0_30} {input.pred_30_100} {output.output_aoa_0_30} {output.output_aoa_30_100} {output.output_figDI_0_30} {output.output_figDI_30_100} {output.output_figure_0_30} {output.output_figure_30_100} "
+    shell: "mkdir -p snakesteps/06_AOA/ && Rscript scripts/06_AOA.R {input.import_model} {input.import_DI} {input.import_tile} {input.tile_fornames} {input.pred_0_30} {input.pred_30_100} {output.output_aoa_0_30} {output.output_aoa_30_100} {output.output_figDI_0_30} {output.output_figDI_30_100} {output.output_figure_0_30} {output.output_figure_30_100} {output.output_error_0_30} {output.output_error_30_100}"
 
+## note: this rule doesn't work: can't export aoa properly
 rule error_metric: 
     input: 
         import_model = import_model,

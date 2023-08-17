@@ -18,14 +18,14 @@ source("scripts/DItoErrormetric.R")
 
 # source("reports/03_modelling/scripts/DItoErrormetric.R")  
 # import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
-# import_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_0_30_tile1-2.tif.rds"
-# import_aoa_30_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_30_100_tile1-2.tif.rds"
-# output_error_0_30 <- "reports/03_modelling/snakesteps/08_figures/error_0_30_nndm_tile1-2.png"
-# output_error_30_100 <- "reports/03_modelling/snakesteps/08_figures/error_30_100_nndm_tile1-2.png"
+# import_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_0_30_export_the_wash_ENG.tif.rds"
+# import_aoa_30_100 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_30_100_export_the_wash_ENG.tif.rds"
+# output_error_0_30 <- "reports/03_modelling/snakesteps/08_figures/error_0_30_nndm_export_the_wash_ENG.tif.png"
+# output_error_30_100 <- "reports/03_modelling/snakesteps/08_figures/error_30_100_nndm_export_the_wash_ENG.tif.png"
 
 final_model <- readRDS(import_model)
 aoa_0_30 <- readRDS(import_aoa_0_30)
-aoa_30_100 <- readRDS(import_aoa_30_30)
+aoa_30_100 <- readRDS(import_aoa_30_100)
 
 ###### 7.1 calculate error model and expected error #####
 
