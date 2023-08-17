@@ -4,14 +4,20 @@ gee_data = "data/2023-08-16_data_covariates_global.csv"
 soc_data = "data/data_clean_SOCD.csv" # need to copy in from 02_data_process/snakesteps/04_OCD/
 marsh_extent = "data/placeholder"
 tile_fornames = "tiles/export_the_wash_ENG.tif"
-tile_dir = "tiles/"
 import_global = "data/global_sample_5k.csv"
 
+# tile_dir = "tiles_locations/" # run for key locations 
+#TILE_LIST = [p.name for p in Path(tile_dir).glob("export*.tif")]
 
-TILE_LIST = [p.name for p in Path(tile_dir).glob("tile*.tif")]
+tile_dir = "tiles/" # for small tile test (quicker to run)
+TILE_LIST = [p.name for p in Path(tile_dir).glob("tile*.tif")] # for small test
 
-# define what you want the snakemake program to find
-# for example, if it is an output of rule train_model, it won't run the rules that aren't needed 
+
+def get_mem_mb(wildcards, attempt):
+    return attempt * 4000
+
+
+
 rule all:
     input: 
         # "snakesteps/01_trainDat/trainDat.rds",
@@ -21,14 +27,15 @@ rule all:
         # "snakesteps/03_models/model_random.rds",
         # "snakesteps/03_models/model_spatial.rds",
         # "snakesteps/03_models/model_nndm.rds"
-         expand("snakesteps/04_output/pred_0_30cm_t_ha_{tile}", tile=TILE_LIST),
-         expand("snakesteps/04_output/pred_30_100cm_t_ha_{tile}", tile=TILE_LIST),
-         expand("snakesteps/04_output/nndm_pred_0_30cm_t_ha_{tile}", tile=TILE_LIST),
-         expand("snakesteps/04_output/nndm_pred_30_100cm_t_ha_{tile}", tile=TILE_LIST)
+        #  expand("snakesteps/04_output/pred_0_30cm_t_ha_{tile}", tile=TILE_LIST),
+        #  expand("snakesteps/04_output/pred_30_100cm_t_ha_{tile}", tile=TILE_LIST),
+        #  expand("snakesteps/04_output/nndm_pred_0_30cm_t_ha_{tile}", tile=TILE_LIST),
+        #  expand("snakesteps/04_output/nndm_pred_30_100cm_t_ha_{tile}", tile=TILE_LIST),
         # "snakesteps/05_DI/model_spatial_trainDI.rds",
-        # "snakesteps/05_DI/model_spatial_trainDI_nndm.rds"
-        #  expand("snakesteps/06_AOA/AOA_{tile}.rds", tile=TILE_LIST)
-        # expand("snakesteps/06_AOA/AOA_nndm_{tile}.rds", tile=TILE_LIST)
+        # "snakesteps/05_DI/model_nndm_trainDI.rds"
+        # expand("snakesteps/06_AOA/AOA_{tile}.rds", tile=TILE_LIST)
+        # expand("snakesteps/06_AOA/AOA_nndm_0_30_{tile}.rds", tile=TILE_LIST)
+        expand("snakesteps/07_error/error_0_30_nndm_{tile}.png", tile=TILE_LIST)
 
 
 rule prep_training_data:
@@ -49,6 +56,8 @@ rule cross_validate:
         output_folds = "snakesteps/02_CV/folds.RDS",
         output_folds_nndm = "snakesteps/02_CV/nndm_folds.RDS",
         output_fig_nndm = "snakesteps/02_CV/nndm_folds_plot.png"
+    resources:
+        mem_mb = 3000
     shell: "mkdir -p snakesteps/02_CV/ && Rscript scripts/02_cross-validation.R {input.import_data} {input.import_global} {output.output_grid} {output.output_folds} {output.output_folds_nndm}  {output.output_fig_nndm}"
 
 
@@ -64,95 +73,92 @@ rule train_model:
         output_random = "snakesteps/03_models/model_random.rds",
         output_spatial = "snakesteps/03_models/model_spatial.rds",
         output_nndm = "snakesteps/03_models/model_nndm.rds"
+    resources:
+        mem_mb = 3000
     shell: "mkdir -p snakesteps/03_models/ && Rscript scripts/03_train_model.R {input.import_data} {input.import_folds}  {input.import_folds_nndm}  {output.varImp_random} {output.varImp_spatial}  {output.varImp_nndm} {output.output_random} {output.output_spatial} {output.output_nndm}"
 
 
+#### input and change whether running spatial or nndm model
+
+### spatial
+# import_model = "snakesteps/03_models/model_spatial.rds"
+# pred_0_30 = "snakesteps/04_output/pred_0_30cm_t_ha_{tile}"
+# pred_30_100 = "snakesteps/04_output/pred_30_100cm_t_ha_{tile}"
+# output_DI = "snakesteps/05_DI/model_spatial_trainDI.rds"
+# output_aoa_0_30 = "snakesteps/06_AOA/AOA_0_30_{tile}.rds"
+# output_aoa_30_100 = "snakesteps/06_AOA/AOA_30_100_{tile}.rds"
+# output_figDI_0_30 =  "snakesteps/08_figures/DI_0_30_{tile}.png"
+# output_figDI_30_100 = "snakesteps/08_figures/DI_30_100_{tile}.png"
+# output_figure_0_30 = "snakesteps/08_figures/pred_AOA_0_30_{tile}.png" #output as .png
+# output_figure_30_100 = "snakesteps/08_figures/pred_AOA_30_100_{tile}.png" #output as .png
+# output_error_0_30 = "snakesteps/07_error/error_0_30_{tile}.png"
+# output_error_30_100 = "snakesteps/07_error/error_30_100_{tile}.png"
+
+# ##### nndm 
+import_model = "snakesteps/03_models/model_nndm.rds"
+pred_0_30 = "snakesteps/04_output/nndm_pred_0_30cm_t_ha_{tile}",
+pred_30_100 = "snakesteps/04_output/nndm_pred_30_100cm_t_ha_{tile}"
+output_DI = "snakesteps/05_DI/model_nndm_trainDI.rds"
+output_aoa_0_30 = "snakesteps/06_AOA/AOA_nndm_0_30_{tile}.rds"
+output_aoa_30_100 = "snakesteps/06_AOA/AOA_nndm_30_100_{tile}.rds"
+output_figDI_0_30 =  "snakesteps/08_figures/DI_0_30_nndm_{tile}.png"
+output_figDI_30_100 = "snakesteps/08_figures/DI_30_100_nndm_{tile}.png"
+output_figure_0_30 = "snakesteps/08_figures/pred_AOA_0_30_nndm_{tile}.png" #output as .png
+output_figure_30_100 = "snakesteps/08_figures/pred_AOA_30_100_nndm_{tile}.png" #output as .png
+output_error_0_30 = "snakesteps/07_error/error_0_30_nndm_{tile}.png"
+output_error_30_100 = "snakesteps/07_error/error_30_100_nndm_{tile}.png"
+
 rule predict:
     input: 
-        import_model = "snakesteps/03_models/model_nndm.rds",
+        import_model = import_model,
         tile_fornames = tile_fornames, 
         import_tile = tile_dir + "{tile}" # all tiles in the tile_list defined at top
     output:
-        pred_0_30 = "snakesteps/04_output/nndm_pred_0_30cm_t_ha_{tile}",
-        pred_30_100 = "snakesteps/04_output/nndm_pred_30_100cm_t_ha_{tile}"
+        pred_0_30 = pred_0_30,
+        pred_30_100 = pred_30_100
+    resources:
+        mem_mb = 6000,
+        runtime = 3
     shell: "mkdir -p snakesteps/04_output/ && Rscript scripts/04_predictions.R {input.import_model} {input.tile_fornames} {input.import_tile} {output.pred_0_30} {output.pred_30_100}"
+
 
 rule trainDI_AOA:
     input:
-        import_model = "snakesteps/03_models/model_nndm.rds"
+        import_model = import_model
     output:
-        output_DI = "snakesteps/05_DI/model_nndm_trainDI.rds"
+        output_DI = output_DI
+    resources:
+        mem_mb = 4000,
+        runtime = 480
     shell: "mkdir -p snakesteps/05_DI/ && Rscript scripts/05_trainDI_AOA.R {input.import_model} {output.output_DI}"
 
 rule calculate_AOA: 
     input: 
-        import_model = "snakesteps/03_models/model_nndm.rds",
-        import_DI = "snakesteps/05_DI/model_nndm_trainDI.rds",
+        import_model = import_model,
+        import_DI = output_DI,
         import_tile = tile_dir + "{tile}",
-        tile_fornames = tile_fornames
+        tile_fornames = tile_fornames,
+        pred_0_30 = pred_0_30,
+        pred_30_100 = pred_30_100
     output:
-         output_aoa = "snakesteps/06_AOA/AOA_nndm_{tile}.rds" #output as .rds
-    shell: "mkdir -p snakesteps/06_AOA/ && Rscript scripts/06_AOA.R {input.import_model} {input.import_DI} {input.import_tile} {input.tile_fornames} {output.output_aoa} "
+        output_aoa_0_30 = output_aoa_0_30,
+        output_aoa_30_100 = output_aoa_30_100,
+        output_figDI_0_30 = output_figDI_0_30, 
+        output_figDI_30_100 = output_figDI_30_100,
+        output_figure_0_30 = output_figure_0_30, #output as .png
+        output_figure_30_100 = output_figure_30_100
+    resources:
+        mem_mb = 6000, # Resources are always meant to be specified as total per job, not by thread 
+        runtime = 3
+    shell: "mkdir -p snakesteps/06_AOA/ && Rscript scripts/06_AOA.R {input.import_model} {input.import_DI} {input.import_tile} {input.tile_fornames} {input.pred_0_30} {input.pred_30_100} {output.output_aoa_0_30} {output.output_aoa_30_100} {output.output_figDI_0_30} {output.output_figDI_30_100} {output.output_figure_0_30} {output.output_figure_30_100} "
 
 rule error_metric: 
     input: 
-        import_model = "snakesteps/03_models/model_mmd,.rds",
-        inmport_aoa = "snakesteps/06_AOA/AOA_nndm_{tile}.rds"
+        import_model = import_model,
+        import_aoa_0_30 = output_aoa_0_30,
+        import_aoa_30_100 = output_aoa_30_100
     output:
-        output_error = ""
-    shell: "mkdir -p snakesteps/07_error/ && Rscript scripts/07_Errormetric.R {input.import_model} {input.inmport_aoa} {output.output_error} "
-
-
-rule visualize_AOA_DI: 
-    input:
-        pred_0_30 = "snakesteps/04_output/nndm_pred_0_30cm_t_ha_{tile}",
-        pred_30_100 = "snakesteps/04_output/nndm_pred_30_100cm_t_ha_{tile}", 
-        import_aoa = "snakesteps/06_AOA/AOA_nndm_{tile}.rds" ,
-        import_DI = "snakesteps/05_DI/model_nndm_trainDI.rds"
-    output:
-        output_figure_0_30 = "snakesteps/08_figures/aoa_{tile}.png" #output as .png
-    shell: "mkdir -p snakesteps/08_figs/ && Rscript scripts/08_visualizeAOA_DI.R {input.import_model} {input.inmport_aoa} {output.output_error} "
-
-
-
-########## Spatial CV ###########
-# to run, just change rule_all input
-
-rule predict_spatial:
-    input: 
-        import_model = "snakesteps/03_models/model_spatial.rds",
-        tile_fornames = tile_fornames, 
-        import_tile = tile_dir + "{tile}" # all tiles in the tile_list defined at top
-    output:
-        pred_0_30 = "snakesteps/04_output/pred_0_30cm_t_ha_{tile}",
-        pred_30_100 = "snakesteps/04_output/pred_30_100cm_t_ha_{tile}"
-    shell: "mkdir -p snakesteps/04_output/ && Rscript scripts/04_predictions.R {input.import_model} {input.tile_fornames} {input.import_tile} {output.pred_0_30} {output.pred_30_100}"
-
-
-## note: need to change here model_nndm or model_spatial depending on CV method
-rule trainDI_AOA_spatial:
-    input:
-        import_model = "snakesteps/03_models/model_spatial.rds"
-    output:
-        output_DI = "snakesteps/05_DI/model_spatial_trainDI.rds"
-    shell: "mkdir -p snakesteps/05_DI/ && Rscript scripts/05_trainDI_AOA.R {input.import_model} {output.output_DI}"
-
-# note: need to change import_model and import_DI if nndm or spatial 
-rule calculate_AOA_spatial: 
-    input: 
-        import_model = "snakesteps/03_models/model_spatial.rds",
-        import_DI = "snakesteps/05_DI/model_spatial_trainDI.rds",
-        import_tile = tile_dir + "{tile}",
-        tile_fornames = tile_fornames
-    output:
-        output_aoa = "snakesteps/06_AOA/AOA_{tile}.rds" #output as .rds
-    shell: "mkdir -p snakesteps/06_AOA/ && Rscript scripts/06_AOA.R {input.import_model} {input.import_DI} {input.import_tile} {input.tile_fornames} {output.output_aoa} "
-
-rule error_metric_spatial: 
-    input: 
-        import_model = "snakesteps/03_models/model_spatial.rds",
-        inmport_aoa = "snakesteps/06_AOA/AOA_{tile}.rds"
-    output:
-        output_error = ""
-    shell: "mkdir -p snakesteps/07_error/ && Rscript scripts/07_Errormetric.R {input.import_model} {input.inmport_aoa} {output.output_error} "
+        output_error_0_30 = output_error_0_30,
+        output_error_30_100 = output_error_30_100
+    shell: "mkdir -p snakesteps/07_error/ && Rscript scripts/07_Errormetric.R {input.import_model} {input.import_aoa_0_30} {input.import_aoa_30_100} {output.output_error_0_30} {output.output_error_30_100} "
 

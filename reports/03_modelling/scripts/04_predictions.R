@@ -14,9 +14,10 @@ pred_0_30 <- args[4]
 pred_30_100 <- args[5]
 
 
-# import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
 # tile_fornames <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
-# import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
+# # import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
+# import_tile <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
 # pred_0_30 <- "reports/03_modelling/snakesteps/04_output/test_prediction_0_30cm_t_ha_global.tif"
 # pred_30_100 <- "reports/03_modelling/snakesteps/04_output/test_prediction_30_100cm_t_ha_global.tif"
 

@@ -7,40 +7,50 @@ library(caret)
 library(sf)
 library(terra)
 library(tidyverse)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+args <- commandArgs(trailingOnly=T)
+import_model <- args[1]
+import_aoa_0_30 <- args[2]
+import_aoa_30_30 <- args[3]
+output_error_0_30 <- args[4]
+output_error_30_100 <- args[5]
+source("scripts/DItoErrormetric.R")  
 
-# args <- commandArgs(trailingOnly=T)
-# import_model <- args[1]
-# import_aoa <- args[2]
-# source("scripts/DItoErrormetric.R")  
-
-source("reports/03_modelling/scripts/DItoErrormetric.R")  
-import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
-# import_trainDI <- readRDS("reports/03_modelling/output/aoa_results.rds")
-import_aoa <- "reports/03_modelling/output/tile1_3_aoa.rds"
+# source("reports/03_modelling/scripts/DItoErrormetric.R")  
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
+# import_aoa_0_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_0_30_tile1-2.tif.rds"
+# import_aoa_30_30 <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_30_100_tile1-2.tif.rds"
+# output_error_0_30 <- "reports/03_modelling/snakesteps/08_figures/error_0_30_nndm_tile1-2.png"
+# output_error_30_100 <- "reports/03_modelling/snakesteps/08_figures/error_30_100_nndm_tile1-2.png"
 
 final_model <- readRDS(import_model)
-AOA <- readRDS(import_aoa)
+aoa_0_30 <- readRDS(import_aoa_0_30)
+aoa_30_100 <- readRDS(import_aoa_30_30)
 
-errormodel <- DItoErrormetric(final_model, trainDI = AOA$parameters, multiCV = FALSE, calib = "lm")
-plot(errormodel)
+###### 7.1 calculate error model and expected error #####
 
-expected_error <- terra::predict(AOA$DI, errormodel)
-plot(expected_error)
+errormodel_0_30 <- DItoErrormetric(final_model, trainDI = aoa_0_30$parameters, multiCV = FALSE)
+expected_error_0_30 <- terra::predict(aoa_0_30$DI, errormodel)
 
-# mask AOA based on new threshold from multiCV
-mask_aoa = terra::mask(expected_error, AOA$DI < attr(errormodel, 'AOA_threshold'), maskvalues = 1)
-plot(mask_aoa)
+errormodel_30_100 <- DItoErrormetric(final_model, trainDI = aoa_30_100$parameters, multiCV = FALSE)
+expected_error_30_100 <- terra::predict(aoa_30_100$DI, errormodel)
 
 
-predictions <- raster::stack("reports/03_modelling/snakesteps/04_output/pred_0_30cm_t_ha_tile1-3.tif")
-names(predictions) <- "pred_0_30cm"
+###### 7.1 export figures #####
 
-par(mfrow = c(1, 2))
-plot(predictions)
+# 0-30 cm
+png(filename = output_error_0_30,
+    width = 950, height = 367)
+par(mfrow = c(1, 2), mar = c("bottom" = 5, "left" = 4, "top" = 4, "right" = 6))
+plot(errormodel_0_30, main = "Error model 0-30cm")
+plot(expected_error_0_30, main = "Expected error 0-30cm")
+dev.off()
 
-plot(mask_aoa, xmin = extent(predictions$pred_0_30cm)[1],
-     xmax = extent(predictions$pred_0_30cm)[2],
-     ymin = extent(predictions$pred_0_30cm)[3],
-     ymax = extent(predictions$pred_0_30cm)[4])
-plot(AOA)
+# 30-100 cm
+png(filename = output_error_30_100,
+    width = 950, height = 367)
+par(mfrow = c(1, 2), mar = c("bottom" = 5, "left" = 4, "top" = 4, "right" = 6))
+plot(errormodel_30_100, main = "Error model 30-100cm")
+plot(expected_error_30_100, main = "Expected error 30-100cm")
+dev.off()
 

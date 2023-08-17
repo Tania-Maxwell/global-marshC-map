@@ -1,18 +1,38 @@
 
-import_pred <- "reports/03_modelling/snakesteps/04_output/pred_0_30cm_t_ha_tile1-3.tif" # this is just to visualize
+#------------------------------------------------------#
+# 8. Visualize predictions, AOA, DI ####
+#------------------------------------------------------#
+library(tidyverse)
+library(raster)
+library(terra)
 
+args <- commandArgs(trailingOnly=T)
+pred_0_30 <- args[1]
+pred_0_30 <- args[2]
+import_aoa <- args[3]
+import_DI <- args[4]
+output_figure_0_30  <-  args[5] #output as .png
+output_figure_30_100 <-   args[6]
+
+pred_0_30 <-  "reports/03_modelling/snakesteps/04_output/nndm_pred_0_30cm_t_ha_tile1-2.tif"
+pred_30_100 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_30_100cm_t_ha_tile1-2.tif"
+import_aoa <- "reports/03_modelling/snakesteps/06_AOA/AOA_nndm_tile1-2.tif.rds"
+import_DI <- "reports/03_modelling/snakesteps/05_DI/model_nndm_trainDI.rds"
+output_figure_0_30 <- "snakesteps/08_figures/pred_AOA_DI_0_30_nndm_tile1-2.png"
+output_figure_30_100 <- "snakesteps/08_figures/pred_AOA_DI_30_100_nndm_tile1-2.png"
+
+
+pred_0_30 <- rast(pred_0_30)
+pred_30_100 <- rast(pred_30_100)
+aoa <- readRDS(import_aoa)
 trainDI <- readRDS(import_DI)
-final_model <- readRDS(import_model)
-tile_fornames <- raster::stack(tile_fornames)
-tile_layers <- raster::stack(import_tile)
 
-#predictions <- raster::stack(import_pred)
+###### 8.1 Visualize DI #####
 
+plot(aoa$AOA)
+plot(aoa) # nndm model 
 
-###### 6.4 Visualize AOA #####
-
-
-###### 6.5 Visualize AOA #####
+###### 8.2 Visualize AOA #####
 # # plot prediction DI vs train DI 
 # plot(a) # spatial model (grids)
 # plot(a_nndm) # nndm model 
