@@ -37,6 +37,8 @@ Scripts and data to model and map soil carbon in tidal marshes
     - `snakesteps/`:  folder with output from snakemake file (i.e. output of all the scripts above).
     - `hpc_tidal_env.yaml`: conda environment used to run snakemake on the HPC. Note: several R packages had to be added manually to the environment on the HPC via the command line (see file `setup_HPC_Renv.txt` in the scripts folder).
 
+![Figure: workflow of rules in the snakemake marshC.smk file, i.e. a directed acyclic graph (DAG) of jobs where the edges represent dependencies.](workflow_snakesteps.png)
+
 - `reports/04_model_tests/`: folder containing scripts with tests (not yet refined - likely to be deleted/changed, currently used as a backup).
 
 - `reports/05_figures/`: folder containing scripts to generate figures (not yet refined - likely to be deleted/changed, currently used as a backup).
