@@ -37,7 +37,7 @@ Scripts and data to model and map soil carbon in tidal marshes
     - `snakesteps/`:  folder with output from snakemake file (i.e. output of all the scripts above).
     - `hpc_tidal_env.yaml`: conda environment used to run snakemake on the HPC. Note: several R packages had to be added manually to the environment on the HPC via the command line (see file `setup_HPC_Renv.txt` in the scripts folder).
 
-![Figure: workflow of rules in the snakemake marshC.smk file, i.e. a directed acyclic graph (DAG) of jobs where the edges represent dependencies.](workflow_snakesteps.png)
+![Figure: workflow of rules in the snakemake marshC.smk file, i.e. a directed acyclic graph (DAG) of jobs where the edges represent dependencies.](reports/03_modelling/workflow_snakesteps.png)
 
 - `reports/04_model_tests/`: folder containing scripts with tests (not yet refined - likely to be deleted/changed, currently used as a backup).
 
@@ -57,17 +57,21 @@ Scripts and data to model and map soil carbon in tidal marshes
 - ~~Ensure marshC.smk snakemake code runs on Ubuntu and debug~~
 - ~~Test marshC.smk snakemake file on HPC with small random test tiles~~
 - ~~Test marshC.smk snakemake on HPC with real key locations~~ 
-    - To do: compare to previous maps (see section below)
-    - To do: debug exporting aoa to be able to read in another file
+    - ~~ To do: compare to previous maps (see section below) ~~ 
+    - ~~ To do: debug exporting aoa to be able to read in another file ~~ 
 - Compare predictions at key locations, when training model with data extracted at native resolution vs data extracted at resampled resolution
-- Run predictions for the world at 1km scale 
+- ~~ Run predictions for the world at 1km scale ~~ 
 
 ##  Comparing to previous maps
+
 geometry: LA_delta_USA
+
 1. Holmquist, J. R. et al. Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States. Sci Rep 8, 9478 (2018).
 
 geometry: west_port_AUS
+
 2. Lewis, C. J. E. et al. Drivers and modelling of blue carbon stock variability in sediments of southeastern Australia. Biogeosciences 17, 2041–2059 (2020).
 
 geometry: the_wash_ENG
+
 3. Smeaton, C. et al. Using citizen science to estimate surficial soil Blue Carbon stocks in Great British saltmarshes. Frontiers in Marine Science 9, 959459 (2022).
