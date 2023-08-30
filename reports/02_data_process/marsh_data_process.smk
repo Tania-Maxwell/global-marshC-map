@@ -24,7 +24,7 @@ rule check_locations:
         #import_GEE_data = import_GEE_data
     output:
         export_file = "snakesteps/02_checkLocations/data_clean_locationsEdit.csv"
-    shell: "mkdir -p snakesteps/02_checkLocations && Rscript scripts/02_point_locations.R {input.import_data}{output.export_file}"
+    shell: "mkdir -p snakesteps/02_checkLocations && Rscript scripts/02_point_locations.R {input.import_data} {output.export_file}"
 
 rule bulk_density:
     input:

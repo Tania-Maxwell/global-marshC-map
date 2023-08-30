@@ -16,6 +16,7 @@ export_file <- args[2]
 # export_file <- "reports/02_data_process/snakesteps/02_checkLocations/data_clean_locationsEdit.csv"
 
 soc_data <- read_csv(import_data)
+print(str(soc_data))
 # 
 # 
 # ####### GEE points with NAs
@@ -86,10 +87,13 @@ soc_locations_edited <- soc_data %>%
   # Kauffman et al - cores seem to be located in mangroves - likely a location error
   filter(Site_name != "JBK Marisma High 1", Site_name != "JBK Marisma High 2",
          Site_name != "JBK Marisma High 3", Site_name != "JBK Marisma High 4", 
-         Site_name != "JBK Marisma Medium 6")
+         Site_name != "JBK Marisma Medium 6") %>% 
+  filter(Latitude <= 60)
 
 ## note: points outside of the bathymask will be removed as they will not have an ndvi value
 # this is removed in the script reports/03_modelling/scripts/01_training_data
 
 ########## export ###########
+print(str(soc_locations_edited))
+
 write.csv(soc_locations_edited, export_file, row.names = F)
