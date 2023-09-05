@@ -63,8 +63,7 @@ data_final <- data0 %>%
                                Source != "CCRCN" ~ Site_name)) %>% 
   filter(is.na(Latitude) == FALSE & is.na(Longitude) == FALSE) %>% 
   mutate(DOI = case_when(Source == "Fuchs et al 2018" ~ "Conference",
-                         TRUE ~ DOI))
-
+                         TRUE ~ DOI)) 
 
 write.csv(data_final, output_csv, row.names = F)
 
@@ -73,7 +72,9 @@ write.csv(data_final, output_csv, row.names = F)
 
 export_df_GEE <- data_final  %>% 
   mutate(Lat_Long = paste(Latitude, Longitude, sep = "_" )) %>% 
-  distinct(Lat_Long, .keep_all = TRUE) 
+  distinct(Lat_Long, .keep_all = TRUE) %>% 
+  mutate(Point_ID = paste0("P", row_number())) %>% 
+  relocate(Point_ID, .before = Source)
 
 write.csv(export_df_GEE, output_for_GEE, row.names = F)
 

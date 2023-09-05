@@ -18,7 +18,7 @@ data0 <- read.csv(import_data)
 
 data_final <- data0 %>% 
   ## creating a midpoint for each depth
-  mutate(Depth_midpoint_m = (L_depth_m - U_depth_m)/2,
+  mutate(Depth_midpoint_m = U_depth_m + ((L_depth_m - U_depth_m)/2),
          Depth_thickness_m = L_depth_m - U_depth_m) %>%
   filter(is.na(Depth_midpoint_m) == FALSE) %>% 
   ##converting SOM to OC just for test (this will be done beforehand for final data)
@@ -31,5 +31,3 @@ data_final <- data0 %>%
 
 ##### Export 
 write.csv(data_final, export_file, row.names = F)
-
-
