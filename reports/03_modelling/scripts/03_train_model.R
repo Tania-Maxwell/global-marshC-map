@@ -7,6 +7,8 @@ library(tidyverse)
 library(sf)
 library(caret)
 library(ranger)
+library(CAST)
+
 
 args <- commandArgs(trailingOnly=T)
 import_data <- args[1]
@@ -18,6 +20,8 @@ varImp_nndm <- args[6]
 output_random <- args[7]
 output_spatial <- args[8]
 output_nndm <- args[9]
+varImp_ffs <- args[10]
+output_ffs <- args[11]
 
 # import_data <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 # import_folds <- "reports/03_modelling/snakesteps/02_CV/folds.RDS"
@@ -28,6 +32,7 @@ output_nndm <- args[9]
 # output_random <- "reports/03_modelling/snakesteps/03_models/model_random.rds"
 # output_spatial <- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
 # output_nndm <- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
+# output_ffs <- "reports/03_modelling/snakesteps/03_models/ffs_model.rds"
 
 
 set.seed(7353)
@@ -44,23 +49,23 @@ colnames(trainDat_formod)
 ############## 3.2 Set model hyperparameters ####################
 
 hyperparameter <- expand.grid(mtry = 3,
-                             splitrule = "variance",
-                             min.node.size = 5)
-tgrid <- expand.grid(
-  .mtry = 2:4,
-  .splitrule = "variance",
-  .min.node.size = c(10, 20)
-)
+                              splitrule = "variance",
+                              min.node.size = 5)
+# tgrid <- expand.grid(
+#   .mtry = 2:4,
+#   .splitrule = "variance",
+#   .min.node.size = c(10, 20)
+# )
 
 ############## 3.2 Train random CV model ####################
 
 model_random <- caret::train(trainDat_formod,
-                      trainDat$response,
-                      method="ranger",
-                      ntree=300,
-                      tuneGrid = hyperparameter,
-                      trControl = trainControl(method="cv",savePredictions = TRUE),
-                      importance = "impurity")
+                             trainDat$response,
+                             method="ranger",
+                             ntree=300,
+                             tuneGrid = hyperparameter,
+                             trControl = trainControl(method="cv",savePredictions = TRUE),
+                             importance = "permutation")
 print(model_random)
 
 
@@ -146,7 +151,7 @@ model_spatial <- caret::train(x = trainDat_formod,
                               trControl = trainControl(method = "cv", number = length(unique(folds)),
                                                        index = i$index, indexOut = i$indexOut,
                                                        savePredictions = "final"),
-                              importance = "impurity")
+                              importance = "permutation")
 print(model_spatial)
 
 #saveRDS(model_spatial, "reports/03_modelling/output/model_spatial_global.rds")
@@ -160,53 +165,65 @@ nndm_folds <- readRDS(import_folds_nndm)
 i_nndm = fold2index(nndm_folds)
 
 model_nndm <- caret::train(x = trainDat_formod,
-                              y = trainDat$response,
-                              method="ranger",
-                              num.trees =300,
-                              tuneGrid = hyperparameter, 
-                              trControl = trainControl(method = "cv", number = length(unique(nndm_folds)),
-                                                       index = i_nndm$index, indexOut = i_nndm$indexOut,
-                                                       savePredictions = "final"),
-                              importance = "impurity")
+                           y = trainDat$response,
+                           method="ranger",
+                           num.trees =300,
+                           tuneGrid = hyperparameter, 
+                           trControl = trainControl(method = "cv", number = length(unique(nndm_folds)),
+                                                    index = i_nndm$index, indexOut = i_nndm$indexOut,
+                                                    savePredictions = "final"),
+                           importance = "permutation")
 print(model_nndm)
 
 
 variable_importance <- caret::varImp(model_nndm)
 plot_model_nndm <- plot(variable_importance)
 
-pairs(trainDat_formod)
-trainDat_sub1 <- trainDat_formod %>%
-  select(copernicus_elevation, copernicus_slope, ndvi_med, ndvi_stdev, maxTemp, minTemp)
 
-plot(trainDat_sub1$ndvi_med, trainDat_sub1$ndvi_stdev)
-plot(trainDat_formod$maxTemp, trainDat_formod$minTemp)
-plot(trainDat_formod$PETdry, trainDat_formod$PETwarm)
-hist(trainDat_sub1$copernicus_slope)
-############## 3.5 export  ####################
+
+############## 3.5 Train NNDM CV model with forward feature selection ####################
+model_ffs = CAST::ffs(predictors = trainDat_formod,
+                      response = trainDat$response,
+                      method = "ranger",
+                      tuneGrid = hyperparameter,
+                      num.trees = 300,
+                      trControl = caret::trainControl(method = "cv",number = length(unique(nndm_folds)),
+                                                      index = i_nndm$index, indexOut = i_nndm$indexOut,
+                                                      savePredictions = "final"),
+                      importance = "permutation")
+print(model_ffs)
+
+variable_importance <- caret::varImp(model_ffs)
+plot_model_ffs <- plot(variable_importance)
+
+
+
+############## 3.6 export  ####################
 
 #open an png with the right file name
 png(filename = varImp_random,
-    #res = 120,
     width = 580, height = 481)
 plot(plot_model_random)
 dev.off()
 
 png(filename = varImp_spatial,
-    #res = 120,
     width = 580, height = 481)
 plot(plot_model_spatial)
 dev.off()
 
 png(filename = varImp_nndm,
-    #res = 120,
     width = 580, height = 481)
 plot(plot_model_nndm)
 dev.off()
+
+png(filename = varImp_ffs,
+    width = 580, height = 481)
+plot(plot_model_ffs)
+dev.off()
+
 
 
 saveRDS(model_random, output_random)
 saveRDS(model_spatial, output_spatial)
 saveRDS(model_nndm, output_nndm)
-
-
-
+saveRDS(model_ffs, output_ffs)
