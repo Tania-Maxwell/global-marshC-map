@@ -51,22 +51,22 @@ Scripts and data to model and map soil carbon in tidal marshes
 - copy data and scripts file to HPC (to update files on HPC)
 - Run snakemake on HPC with slurm to run all modelling scrips and predict in parallel 
 
-# Current test steps 
+## Current test steps 
 
 - ~~Ensure R code runs on Ubuntu subsystem (same tidal environment as on the HPC)~~
 - ~~Ensure marshC.smk snakemake code runs on Ubuntu and debug~~
 - ~~Test marshC.smk snakemake file on HPC with small random test tiles~~
 - ~~Test marshC.smk snakemake on HPC with real key locations~~ 
-    - ~~ To do: compare to previous maps (see section below) ~~ 
-    - ~~ To do: debug exporting aoa to be able to read in another file ~~ 
+    - ~~To do: compare to previous maps (see section below)~~ 
+    - ~~To do: debug exporting aoa to be able to read in another file~~ 
 - ~~Re-run model with only unique lat_long (i.e. remove cores with more than one location)~~
 - ~~Compare predictions at key locations, when training model with data extracted at native resolution vs data extracted at resampled resolution~~
-- ~~ Run predictions for the world at 1km scale ~~ 
-- ~~ Compare importance = "impurity" vs "permutation" ~~
+- ~~Run predictions for the world at 1km scale~~ 
+- ~~Compare importance = "impurity" vs "permutation"~~
 
-##  Comparing to previous maps
+#  Comparing to previous maps
 
-### LA_delta_USA
+## LA_delta_USA
 
 ![Figure: LA_delta_USA SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_LA_delta_USA_v2.tif.png)
 
@@ -74,7 +74,7 @@ Scripts and data to model and map soil carbon in tidal marshes
 
 Reference for comparison: Holmquist, J. R. et al. Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States. _Scientific Reports_ 8, 9478 (2018).
 
-### west_port_AUS
+## west_port_AUS
 
 ![Figure: west_port_AUS SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_west_port_AUS_v2.tif.png)
 
@@ -82,7 +82,7 @@ Reference for comparison: Holmquist, J. R. et al. Accuracy and Precision of Tida
 
 Reference for comparison: Lewis, C. J. E. et al. Drivers and modelling of blue carbon stock variability in sediments of southeastern Australia. _Biogeosciences_ 17, 2041–2059 (2020).
 
-### the_wash_ENG
+## the_wash_ENG
 
 ![Figure: the_wash_ENG SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_the_wash_ENG_v2.tif.png)
 
@@ -90,7 +90,7 @@ Reference for comparison: Lewis, C. J. E. et al. Drivers and modelling of blue c
 
 Reference for comparison: Smeaton, C. et al. Using citizen science to estimate surficial soil Blue Carbon stocks in Great British saltmarshes. _Frontiers in Marine Science_ 9, 959459 (2022).
 
-### arctic_test 
+## arctic_test 
 
 ![Figure: arctic_test SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_arctic_test.tif.png)
 
