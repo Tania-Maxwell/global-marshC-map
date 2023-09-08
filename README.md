@@ -59,19 +59,41 @@ Scripts and data to model and map soil carbon in tidal marshes
 - ~~Test marshC.smk snakemake on HPC with real key locations~~ 
     - ~~ To do: compare to previous maps (see section below) ~~ 
     - ~~ To do: debug exporting aoa to be able to read in another file ~~ 
-- Compare predictions at key locations, when training model with data extracted at native resolution vs data extracted at resampled resolution
+- ~~Re-run model with only unique lat_long (i.e. remove cores with more than one location)~~
+- ~~Compare predictions at key locations, when training model with data extracted at native resolution vs data extracted at resampled resolution~~
 - ~~ Run predictions for the world at 1km scale ~~ 
+- ~~ Compare importance = "impurity" vs "permutation" ~~
 
 ##  Comparing to previous maps
 
-geometry: LA_delta_USA
+### LA_delta_USA
 
-1. Holmquist, J. R. et al. Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States. Sci Rep 8, 9478 (2018).
+![Figure: LA_delta_USA SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_LA_delta_USA_v2.tif.png)
 
-geometry: west_port_AUS
+![Figure: LA_delta_USA SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_LA_delta_USA_v2.tif.png)
 
-2. Lewis, C. J. E. et al. Drivers and modelling of blue carbon stock variability in sediments of southeastern Australia. Biogeosciences 17, 2041–2059 (2020).
+Reference for comparison: Holmquist, J. R. et al. Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States. _Scientific Reports_ 8, 9478 (2018).
 
-geometry: the_wash_ENG
+### west_port_AUS
 
-3. Smeaton, C. et al. Using citizen science to estimate surficial soil Blue Carbon stocks in Great British saltmarshes. Frontiers in Marine Science 9, 959459 (2022).
+![Figure: west_port_AUS SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_west_port_AUS_v2.tif.png)
+
+![Figure: west_port_AUS SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_west_port_AUS_v2.tif.png)
+
+Reference for comparison: Lewis, C. J. E. et al. Drivers and modelling of blue carbon stock variability in sediments of southeastern Australia. _Biogeosciences_ 17, 2041–2059 (2020).
+
+### the_wash_ENG
+
+![Figure: the_wash_ENG SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_the_wash_ENG_v2.tif.png)
+
+![Figure: the_wash_ENG SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_the_wash_ENG_v2.tif.png)
+
+Reference for comparison: Smeaton, C. et al. Using citizen science to estimate surficial soil Blue Carbon stocks in Great British saltmarshes. _Frontiers in Marine Science_ 9, 959459 (2022).
+
+### arctic_test 
+
+![Figure: arctic_test SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_arctic_test.tif.png)
+
+![Figure: arctic_test SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_arctic_test.tif.png)
+
+Not previously mapped, to compare AOA to previously mapped areas.   
