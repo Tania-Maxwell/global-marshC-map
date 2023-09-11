@@ -151,9 +151,3 @@ st_write(grid, output_grid, append = FALSE) # grid
 saveRDS(spatial_folds, output_folds)
 saveRDS(nndm_folds, output_folds_nndm)
 ggsave(output_fig_nndm , nndm_folds_plot, width = 9.56, height = 4.75)
-
-
-# output_folds_nndm <- "reports/03_modelling/snakesteps_native/02_CV/nndm_folds_10.RDS"
-# output_fig_nndm <-  "reports/03_modelling/snakesteps_native/02_CV/nndm_folds_plot_10.png"
-# saveRDS(nndm_folds, output_folds_nndm)
-# ggsave(output_fig_nndm , nndm_folds_plot, width = 9.56, height = 4.75)

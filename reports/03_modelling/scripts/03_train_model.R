@@ -49,8 +49,8 @@ colnames(trainDat_formod)
 ############## 3.2 Set model hyperparameters ####################
 
 hyperparameter <- expand.grid(mtry = 3,
-                              splitrule = "variance",
-                              min.node.size = 5)
+                             splitrule = "variance",
+                             min.node.size = 5)
 # tgrid <- expand.grid(
 #   .mtry = 2:4,
 #   .splitrule = "variance",
@@ -60,12 +60,12 @@ hyperparameter <- expand.grid(mtry = 3,
 ############## 3.2 Train random CV model ####################
 
 model_random <- caret::train(trainDat_formod,
-                             trainDat$response,
-                             method="ranger",
-                             ntree=300,
-                             tuneGrid = hyperparameter,
-                             trControl = trainControl(method="cv",savePredictions = TRUE),
-                             importance = "permutation")
+                      trainDat$response,
+                      method="ranger",
+                      ntree=300,
+                      tuneGrid = hyperparameter,
+                      trControl = trainControl(method="cv",savePredictions = TRUE),
+                      importance = "permutation")
 print(model_random)
 
 
@@ -165,14 +165,14 @@ nndm_folds <- readRDS(import_folds_nndm)
 i_nndm = fold2index(nndm_folds)
 
 model_nndm <- caret::train(x = trainDat_formod,
-                           y = trainDat$response,
-                           method="ranger",
-                           num.trees =300,
-                           tuneGrid = hyperparameter, 
-                           trControl = trainControl(method = "cv", number = length(unique(nndm_folds)),
-                                                    index = i_nndm$index, indexOut = i_nndm$indexOut,
-                                                    savePredictions = "final"),
-                           importance = "permutation")
+                              y = trainDat$response,
+                              method="ranger",
+                              num.trees =300,
+                              tuneGrid = hyperparameter, 
+                              trControl = trainControl(method = "cv", number = length(unique(nndm_folds)),
+                                                       index = i_nndm$index, indexOut = i_nndm$indexOut,
+                                                       savePredictions = "final"),
+                              importance = "permutation")
 print(model_nndm)
 
 
@@ -183,14 +183,14 @@ plot_model_nndm <- plot(variable_importance)
 
 ############## 3.5 Train NNDM CV model with forward feature selection ####################
 model_ffs = CAST::ffs(predictors = trainDat_formod,
-                      response = trainDat$response,
-                      method = "ranger",
-                      tuneGrid = hyperparameter,
-                      num.trees = 300,
-                      trControl = caret::trainControl(method = "cv",number = length(unique(nndm_folds)),
-                                                      index = i_nndm$index, indexOut = i_nndm$indexOut,
-                                                      savePredictions = "final"),
-                      importance = "permutation")
+                     response = trainDat$response,
+                     method = "ranger",
+                     tuneGrid = hyperparameter,
+                     num.trees = 300,
+                     trControl = caret::trainControl(method = "cv",number = length(unique(nndm_folds)),
+                                                     index = i_nndm$index, indexOut = i_nndm$indexOut,
+                                                     savePredictions = "final"),
+                     importance = "permutation")
 print(model_ffs)
 
 variable_importance <- caret::varImp(model_ffs)
