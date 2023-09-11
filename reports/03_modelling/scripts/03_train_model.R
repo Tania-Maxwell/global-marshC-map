@@ -22,7 +22,9 @@ output_spatial <- args[8]
 output_nndm <- args[9]
 varImp_ffs <- args[10]
 output_ffs <- args[11]
+source("scripts/fold2index.R")
 
+# source("reports/03_modelling/scripts/fold2index.R")
 # import_data <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 # import_folds <- "reports/03_modelling/snakesteps/02_CV/folds.RDS"
 # import_folds_nndm <- "reports/03_modelling/snakesteps/02_CV/nndm_folds.RDS"
@@ -86,46 +88,6 @@ plot_model_random <- plot(variable_importance)
 ############## 3.3 Import folds for CV model ####################
 
 folds <- readRDS(import_folds)
-
-#' Fold to Index
-#' @description Creates index and indexOut for caret::trainControl from a fold vector
-#'
-#' @param folds vector with fold labels
-#'
-#' @return list, with index and indexOut
-#'
-#' @import purrr
-#' @import dplyr
-#'
-#' @export
-#'
-#' @author Marvin Ludwig
-#'
-#'
-#'
-
-fold2index = function(fold){
-  
-  fold = data.frame(fold = fold)
-  
-  indOut = fold %>% dplyr::group_by(fold) %>%
-    attr('groups') %>% dplyr::pull(.rows)
-  
-  ind = purrr::map(seq(length(indOut)), function(x){
-    s = seq(nrow(fold))
-    s = s[!s %in% indOut[[x]]]
-    return(s)
-  })
-  return(
-    list(
-      index = ind,
-      indexOut = indOut
-    )
-  )
-  
-}
-
-
 
 
 ############## 3.4 Train spatial CV model ####################

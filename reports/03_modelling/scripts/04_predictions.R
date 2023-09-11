@@ -13,10 +13,10 @@ pred_0_30 <- args[3]
 pred_30_100 <- args[4]
 
 
-# import_model<- "reports/03_modelling/snakesteps_native/03_models/model_nndm_permutation.rds"
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
 # import_tile <- "reports/03_modelling/tiles_locations/export_LA_low_forAndre.tif"
-# pred_0_30 <- "reports/03_modelling/snakesteps_native/04_output/native_perm_nndm_pred_0_30cm_t_ha_export_LA_low.tif"
-# pred_30_100 <- "reports/03_modelling/snakesteps_native/04_output/native_perm_nndm_pred_30_100cm_t_export_LA_low.tif"
+# pred_0_30 <- "reports/03_modelling/snakesteps/04_output/perm_nndm_pred_0_30cm_t_ha_export_LA_low.tif"
+# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/perm_nndm_pred_30_100cm_t_export_LA_low.tif"
 
 
 ############## 4.1 Import tiles data ####################
