@@ -67,7 +67,7 @@ model_random <- caret::train(trainDat_formod,
                       ntree=300,
                       tuneGrid = hyperparameter,
                       trControl = trainControl(method="cv",savePredictions = TRUE),
-                      importance = "permutation")
+                      importance = "impurity")
 print(model_random)
 
 
@@ -113,7 +113,7 @@ model_spatial <- caret::train(x = trainDat_formod,
                               trControl = trainControl(method = "cv", number = length(unique(folds)),
                                                        index = i$index, indexOut = i$indexOut,
                                                        savePredictions = "final"),
-                              importance = "permutation")
+                              importance = "impurity")
 print(model_spatial)
 
 #saveRDS(model_spatial, "reports/03_modelling/output/model_spatial_global.rds")
@@ -134,7 +134,7 @@ model_nndm <- caret::train(x = trainDat_formod,
                               trControl = trainControl(method = "cv", number = length(unique(nndm_folds)),
                                                        index = i_nndm$index, indexOut = i_nndm$indexOut,
                                                        savePredictions = "final"),
-                              importance = "permutation")
+                              importance = "impurity")
 print(model_nndm)
 
 
@@ -152,7 +152,7 @@ model_ffs = CAST::ffs(predictors = trainDat_formod,
                      trControl = caret::trainControl(method = "cv",number = length(unique(nndm_folds)),
                                                      index = i_nndm$index, indexOut = i_nndm$indexOut,
                                                      savePredictions = "final"),
-                     importance = "permutation")
+                     importance = "impurity")
 print(model_ffs)
 
 variable_importance <- caret::varImp(model_ffs)
