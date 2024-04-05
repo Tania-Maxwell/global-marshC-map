@@ -1,0 +1,13 @@
+Zone,mean_pred0,mean_err0,aoa_prop,mean_pred0_aoa,mean_err0_aoa,column1,column3
+Arctic,96.2,60.6,1.5,121.8,52.5,96.19 (60.55),121.8 (52.49)
+Central Indo-Pacific,70.6,56.3,22.6,71.4,51.1,70.55 (56.3),71.35 (51.09)
+Eastern Indo-Pacific,82.1,54.5,31.3,83.9,52.4,82.06 (54.45),83.88 (52.44)
+Temperate Australasia,89.6,47.1,87.9,89.0,45.9,89.56 (47.1),89 (45.87)
+Temperate Northern Atlantic,85.0,43.6,95.2,84.2,43.0,84.95 (43.56),84.24 (42.98)
+Temperate Northern Pacific,98.3,54.8,29.2,77.1,48.2,98.34 (54.8),77.11 (48.19)
+Temperate South America,84.4,52.8,52.0,81.2,50.8,84.41 (52.75),81.16 (50.75)
+Temperate Southern Africa,83.3,47.1,96.4,83.0,46.8,83.31 (47.13),82.96 (46.84)
+Tropical Atlantic,77.5,51.7,65.4,78.8,49.5,77.52 (51.65),78.77 (49.46)
+Tropical Eastern Pacific,82.7,50.4,67.7,86.4,48.5,82.72 (50.44),86.42 (48.5)
+Western Indo-Pacific,63.6,54.6,44.9,64.0,51.6,63.56 (54.63),63.95 (51.58)
+Global,88.13,50.63,58.00,83.09,44.77,,
