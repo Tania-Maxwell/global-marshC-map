@@ -1,8 +1,11 @@
+# Snakemake file to run all steps for the modelling 
+# https://snakemake.github.io/ 
+# can be run locally or on an HPC, where it can submit jobs with slurm automatically 
+
 from pathlib import Path
 
 gee_data = "data/2023-08-30_data_covariates_global_native.csv" 
 soc_data = "data/data_clean_SOCD.csv" # need to copy in from 02_data_process/snakesteps/04_OCD/
-marsh_extent = "data/placeholder"
 tile_fornames = "tiles_locations/export_the_wash_ENG_v2.tif"
 import_global = "data/global_sample_5k.csv"
 
