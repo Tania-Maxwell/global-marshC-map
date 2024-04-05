@@ -1,3 +1,7 @@
+# these commands were run directly in R on the HPC (easier than installing with conda) 
+
+conda activate tidal
+R
 Rscript -e 'install.packages("randomForest", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("CAST", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("ranger", repos="https://cloud.r-project.org")'
@@ -8,3 +12,8 @@ Rscript -e 'install.packages("raster", repos="https://cloud.r-project.org")' # t
 Rscript -e 'install.packages("twosamples", repos="https://cloud.r-project.org")' # for knndm function
 Rscript -e 'install.packages("maps", repos="https://cloud.r-project.org")' #to map world within ggplot
 Rscript -e 'install.packages("scam", repos="https://cloud.r-project.org")' # for error_metric scam
+Rscript -e 'install.packages("rasterVis", repos="https://cloud.r-project.org")' # for levelplot()
+Rscript -e 'install.packages("scales", repos="https://cloud.r-project.org")' # for viridis_pal()
+Rscript -e 'install.packages("gridExtra", repos="https://cloud.r-project.org")' # for grid.arrange
+Rscript -e 'install.packages("jsonlite", repos="https://cloud.r-project.org")' # for VsCode
+Rscript -e 'install.packages("sf", repos="https://cloud.r-project.org")' # 
