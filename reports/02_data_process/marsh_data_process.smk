@@ -1,5 +1,5 @@
 
-import_SaltmarshC = "../../../SaltmarshC/reports/04_data_process/data/data_cleaned_SOMconverted.csv" # this file comes from data paper export. will hard code file when finalized
+import_SaltmarshC = "data/data_cleaned_SOMconverted.csv" # this file comes from data paper export. hard coded the file on 05.04.24
 import_buffer5km = "data/TidalMarsh_Training_Buffer_5km.txt"
 import_buffer10km = "data/TidalMarsh_Training_Buffer_10km.txt"
 
