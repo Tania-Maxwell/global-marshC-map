@@ -26,23 +26,22 @@ plot_pred_30_100 <- function(r){
   return(p)
 }
 
-r <- a_0_30$AOA
 plot_aoa_0_30 <- function(r){
   p <- levelplot(r, margin = FALSE, 
                  col.regions =  c("#D55E00","#D55E00","#009E73","#009E73"),
                  at = c(0,0.499, 0.501,1),
                  colorkey=list(at=c(0,0.499, 0.501,1),
                                labels=as.character(c( "0","","", "1"))),
-                 main = "Area of applicability at 15cm depth")
+                 main = "Area of applicability 0-30cm")
   return(p)
 }
-
 
 plot_aoa_30_100 <- function(r){
   p <- levelplot(r, margin = FALSE, 
                  col.regions =  c("#D55E00","#D55E00","#009E73","#009E73"),
                  at = c(0,0.499, 0.501,1),
-                 labels=as.character( c( "0", "1")),
-                 main = "Area of applicability at 65cm depth")
+                 colorkey=list(at=c(0,0.499, 0.501,1),
+                               labels=as.character(c( "0","","", "1"))),
+                 main = "Area of applicability at 30-100cm depth")
   return(p)
 }

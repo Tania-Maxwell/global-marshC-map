@@ -21,7 +21,6 @@ output_folds_nndm <- args[5]
 output_fig_nndm <- args[6]
 source("scripts/knndm.R")
 
-
 # source("reports/03_modelling/scripts/knndm.R")
 # import_data <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 # output_grid <- "reports/03_modelling/snakesteps/02_CV/spatial_folds_grid.gpkg"

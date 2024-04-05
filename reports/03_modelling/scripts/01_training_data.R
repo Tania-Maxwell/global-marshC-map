@@ -9,6 +9,7 @@
 # library(ggplot2)
 
 library(tidyverse)
+#library(geojsonio) #geojson_read
 library(geojsonsf) 
 library(terra) #crs
 library(sf) # st_as_sf
@@ -20,7 +21,7 @@ soc_data <- args[3]
 output_gpkg <- args[4]
 
 # site_layer <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
-# gee_data <- "reports/03_modelling/data/2023-08-30_data_covariates_global_native.csv"
+# gee_data <- "reports/03_modelling/data/2023-08-30_data_covariates_global.csv"
 # soc_data <- "reports/02_data_process/snakesteps/04_OCD/data_clean_SOCD.csv"
 # output_gpkg <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 

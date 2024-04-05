@@ -1,0 +1,8 @@
+# command line to run snakemake file on all tiles of the world located in the south east (this was repeated for all 4 quarters of the world) 
+# note: these tiles are not available on github 
+# contact : taniamaxwell7@gmail.com 
+
+cd model_SE
+conda activate tidal
+snakemake -s ../marshC.smk --config tile_folder="../tiles_world_30m/SE/" --max-jobs-per-second 1 --retries 3 --slurm --default-resources slurm_account=<account name> slurm_partition=cclake-himem -j100 -n
+snakemake -s ../marshC.smk --config tile_folder="../tiles_world_30m/SE/" --max-jobs-per-second 1 --retries 3 --slurm --default-resources slurm_account=<account name> slurm_partition=cclake-himem -j100

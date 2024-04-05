@@ -23,9 +23,8 @@ output_DI <- args[2]
 source("scripts/trainDI.R")
 
 # source("reports/03_modelling/scripts/trainDI.R")
-# import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
-# output_DI <- "reports/03_modelling/snakesteps/05_DI/model_nndm_trainDI.rds"
-
+# import_model<- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
+# output_DI <- "reports/03_modelling/snakesteps/05_AOA/model_spatial_trainDI.rds"
 
 ############## 5.1 Import model ####################
 final_model <- readRDS(import_model)

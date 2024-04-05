@@ -2,13 +2,12 @@
 # 3. Train the model ####
 #------------------------------------------------------#
 
-rm(list=ls()) # clear the workspace
+# rm(list=ls()) # clear the workspace
 library(tidyverse)
 library(sf)
 library(caret)
 library(ranger)
 library(CAST)
-
 
 args <- commandArgs(trailingOnly=T)
 import_data <- args[1]
@@ -22,9 +21,8 @@ output_spatial <- args[8]
 output_nndm <- args[9]
 varImp_ffs <- args[10]
 output_ffs <- args[11]
-source("scripts/fold2index.R")
+source("scripts/fold2index.R")  
 
-# source("reports/03_modelling/scripts/fold2index.R")
 # import_data <- "reports/03_modelling/snakesteps/01_trainDat/trainDat.gpkg"
 # import_folds <- "reports/03_modelling/snakesteps/02_CV/folds.RDS"
 # import_folds_nndm <- "reports/03_modelling/snakesteps/02_CV/nndm_folds.RDS"
@@ -34,7 +32,6 @@ source("scripts/fold2index.R")
 # output_random <- "reports/03_modelling/snakesteps/03_models/model_random.rds"
 # output_spatial <- "reports/03_modelling/snakesteps/03_models/model_spatial.rds"
 # output_nndm <- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
-# output_ffs <- "reports/03_modelling/snakesteps/03_models/ffs_model.rds"
 
 
 set.seed(7353)
@@ -189,3 +186,5 @@ saveRDS(model_random, output_random)
 saveRDS(model_spatial, output_spatial)
 saveRDS(model_nndm, output_nndm)
 saveRDS(model_ffs, output_ffs)
+
+

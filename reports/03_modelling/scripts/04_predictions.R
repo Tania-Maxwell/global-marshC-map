@@ -14,10 +14,11 @@ pred_30_100 <- args[4]
 
 
 # import_model<- "reports/03_modelling/snakesteps/03_models/model_nndm.rds"
-# import_tile <- "reports/03_modelling/tiles_locations/export_LA_low_forAndre.tif"
-# pred_0_30 <- "reports/03_modelling/snakesteps/04_output/perm_nndm_pred_0_30cm_t_ha_export_LA_low.tif"
-# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/perm_nndm_pred_30_100cm_t_export_LA_low.tif"
-
+# tile_fornames <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
+# # import_tile <- "reports/01_covariate_layers/data/tiles_crop/tile1.tif"
+# import_tile <- "reports/03_modelling/tiles/export_the_wash_ENG.tif"
+# pred_0_30 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_0_30cm_t_ha_export_the_wash_ENG.tif"
+# pred_30_100 <- "reports/03_modelling/snakesteps/04_output/nndm_pred_30_100cm_t_ha_export_the_wash_ENG.tif"
 
 ############## 4.1 Import tiles data ####################
 tile_layers <- raster::stack(import_tile)
@@ -61,7 +62,7 @@ names(Depth_to_predict_30m) <- "Depth_midpoint_m"
 
 # add the layer to the raster stack tile_layers, to create a tile_layers_forpred (for predictions) 
 tile_layers_forpred_30m <- addLayer(tile_layers, Depth_to_predict_30m)
-
+   
 
 ###### Depth at 1 m #####
 
@@ -120,4 +121,5 @@ prediction_0_100cm_t_ha <- sum(prediction_0_30cm_t_ha, prediction_30_100cm_t_ha)
 
 writeRaster(prediction_0_30cm_t_ha, filename = pred_0_30)
 writeRaster(prediction_30_100cm_t_ha, filename = pred_30_100)
+
 
