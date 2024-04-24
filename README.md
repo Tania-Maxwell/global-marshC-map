@@ -51,12 +51,12 @@ Scripts and data to model and map soil organic carbon in tidal marshes.
 
 - `reports/05_figures/`: folder containing scripts to generate figures. 
 
-- `reports/06_analysis/`: folder containing scripts to generate figures. 
+- `reports/06_analysis/`: folder containing realm-level and country-level summaries. 
 
 
 #  Comparing to previous maps
 
-## LA_delta_USA
+## Louisiana Delta, USA
 
 ![Figure: LA_delta_USA SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_LA_delta_USA_v2.tif.png)
 
@@ -64,7 +64,7 @@ Scripts and data to model and map soil organic carbon in tidal marshes.
 
 Reference for comparison: Holmquist, J. R. et al. Accuracy and Precision of Tidal Wetland Soil Carbon Mapping in the Conterminous United States. _Scientific Reports_ 8, 9478 (2018).
 
-## west_port_AUS
+## West Port, Australia
 
 ![Figure: west_port_AUS SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_west_port_AUS_v2.tif.png)
 
@@ -72,7 +72,7 @@ Reference for comparison: Holmquist, J. R. et al. Accuracy and Precision of Tida
 
 Reference for comparison: Lewis, C. J. E. et al. Drivers and modelling of blue carbon stock variability in sediments of southeastern Australia. _Biogeosciences_ 17, 2041–2059 (2020).
 
-## the_wash_ENG
+## The Wash, England
 
 ![Figure: the_wash_ENG SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_the_wash_ENG_v2.tif.png)
 
@@ -80,27 +80,36 @@ Reference for comparison: Lewis, C. J. E. et al. Drivers and modelling of blue c
 
 Reference for comparison: Smeaton, C. et al. Using citizen science to estimate surficial soil Blue Carbon stocks in Great British saltmarshes. _Frontiers in Marine Science_ 9, 959459 (2022).
 
-## south_africa
+## Swartvlei, South Africa
 
 ![Figure: south_africa SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_south_africa.tif.png)
 
 ![Figure: south_africa SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_south_africa.tif.png)
 
-## arctic_test 
+## Location in the Arctic, Canada
 
 ![Figure: arctic_test SOC stocks and AOA at 0-30 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_0_30_nndm_export_arctic_test.tif.png)
 
 ![Figure: arctic_test SOC stocks and AOA at 30-100 cm](reports/03_modelling/snakesteps/08_figures/pred_AOA_30_100_nndm_export_arctic_test.tif.png)
 
-# Citation
+# Citations
 
 ```
-@article{maxwell_biorxiv_2023,
-    title = {Global dataset of soil organic carbon in tidal marshes},
+@article{maxwell_biorxiv_2024,
+    title = {Soil carbon in the world's tidal marshes},
     author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
-    year = {2023},
-    journal = {BioRxiv},
+    year = {2024},
+    journal = {bioRxiv},
     doi = {}
+}
+
+@misc{maxwell_dataset_2023,
+    title = {Global soil organic carbon in tidal marshes version 1},
+	author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
+    year = {2024},
+    url = {https://doi.org/10.5281/zenodo.10940066},
+    publisher = {Zenodo},
+    doi = {10.5281/zenodo.10940066},
 }
 ``` 
 
@@ -111,4 +120,4 @@ For any queries, please contact Tania L. Maxwell (taniamaxwell7 [at] gmail.com).
 
 # Version History 
 
-v1 | April 5, 2024 | First release for BioRxiv 
+v1 | April 25, 2024 | First release for bioRxiv 
