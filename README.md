@@ -1,4 +1,9 @@
 # Global marsh SOC modelling 
+
+
+[![DOI](https://zenodo.org/badge/643928590.svg)](https://doi.org/10.5281/zenodo.14031246)
+
+
 Scripts and data to model and map soil organic carbon in tidal marshes. 
 
 ![Figure: analysis workflow](map_workflow_2023-09-22.png)
