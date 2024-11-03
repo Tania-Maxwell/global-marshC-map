@@ -1,3 +1,5 @@
+library(tidyverse)
+
 varImp <- readRDS("reports/05_figures/scripts/varImp_scaled.rds")
 varImp
 
@@ -36,5 +38,5 @@ imp_plot <- ggplot(imp_final, aes(x=reorder(variable, Overall), y=Overall)) +
 
 imp_plot
 
-ggsave("reports/05_figures/paper_figures/Figure 4.png", imp_plot, 
+ggsave("reports/05_figures/paper_figures/Figure 4.pdf", imp_plot, 
        width = 5.48, height = 4.50)
