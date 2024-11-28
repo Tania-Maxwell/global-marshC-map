@@ -100,18 +100,20 @@ Reference for comparison: Smeaton, C. et al. Using citizen science to estimate s
 # Citations
 
 ```
-@article{maxwell_biorxiv_2024,
+@article{maxwell_natcommun_2024,
     title = {Soil carbon in the world's tidal marshes},
-    author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
+    author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Austin, William E.N. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
     year = {2024},
-    url = {https://doi.org/10.1101/2024.04.26.590902},
-    journal = {bioRxiv},
-    doi = {10.1101/2024.04.26.590902}
+    url = {https://doi.org/10.1038/s41467-024-54572-9},
+    journal = {Nature Communications},
+    volume = {15},
+    number = {10265},
+    doi = {https://doi.org/10.1038/s41467-024-54572-9}
 }
 
 @misc{maxwell_dataset_2023,
     title = {Global soil organic carbon in tidal marshes version 1},
-	author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
+	author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Austin, William E.N. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
     year = {2024},
     url = {https://doi.org/10.5281/zenodo.10940066},
     publisher = {Zenodo},
