@@ -111,20 +111,20 @@ Reference for comparison: Smeaton, C. et al. Using citizen science to estimate s
     doi = {https://doi.org/10.1038/s41467-024-54572-9}
 }
 
-@misc{maxwell_dataset_2023,
-    title = {Global soil organic carbon in tidal marshes version 1},
+@misc{maxwell_dataset_2025,
+    title = {Global soil organic carbon in tidal marshes version 2},
 	author = {Maxwell, Tania L. and Spalding, Mark D. and Friess, Daniel A. and Murray, Nicholas J. and Rogers, Kerrylee and Rovai, André S. and Smart, Lindsey S. and Weilguny, Lukas and Adame, Maria Fernanda and Adams, Janine B. and Austin, William E.N. and Copertino, Margareth and Cott, Grace M. and Duarte de Paula Costa, Micheli and Holmquist, James R. and Ladd, Cai J.T. and Lovelock, Catherine E. and Ludwig, Marvin and Moritsch, Monica M. and Navarro, Alejandro and Raw, Jacqueline L. and Ruiz-Fernández, Ana Carolina and Serrano, Oscar and Smeaton, Craig and Van de Broek, Marijn and Windham-Myers, Lisamarie and Landis, Emily and Worthington, Thomas A.},
-    year = {2024},
-    url = {https://doi.org/10.5281/zenodo.10940066},
+    year = {2025},
+    url = {https://doi.org/10.5281/zenodo.17631101},
     publisher = {Zenodo},
-    doi = {10.5281/zenodo.10940066},
+    doi = {10.5281/zenodo.17631101},
 }
 ``` 
 
 
 # Contact 
 
-For any queries, please contact Tania L. Maxwell (taniamaxwell7 [at] gmail.com). 
+For any queries, please contact Tania L. Maxwell (tania.maxwell [at] universite-paris-saclay.fr). 
 
 # Version History 
 
